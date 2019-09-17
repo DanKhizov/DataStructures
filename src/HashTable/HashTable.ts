@@ -1,5 +1,9 @@
-class HashTable<T> {
-    private arr: Array<T> = new Array(32);
+class HashTable<V> {
+    private arr: Array<V>;
+
+    constructor(initialCapacity: number = 32 /* loadFactor: number = 0.75 */) {
+        this.arr = new Array<V>(initialCapacity);
+    }
 
     private getIndexByKey(key: string): number {
         let sum = 0;
@@ -11,12 +15,12 @@ class HashTable<T> {
         return sum % (this.arr.length - 1);
     }
 
-    put(key: string, value: T): void {
+    public put(key: string, value: V): void {
         const idx = this.getIndexByKey(key);
         this.arr[idx] = value;
     }
 
-    get(key: string): T {
+    public get(key: string): V {
         const idx = this.getIndexByKey(key);
         return this.arr[idx];
     }
