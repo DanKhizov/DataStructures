@@ -1,14 +1,19 @@
+import LinkedList from '../List/LinkedList';
+
 class HashTable<T> {
     private arr: Array<T> = new Array(32);
 
-    private getIndexByKey(key: string): number {
+    private getHash(key: string): number {
         let sum = 0;
-
         for (let i = 0; i < key.length; i++) {
             sum += key.charCodeAt(i);
         }
+        return sum;
+    }
 
-        return sum % (this.arr.length - 1);
+    private getIndexByKey(key: string): number {
+        const hash = this.getHash(key);
+        return hash % (this.arr.length - 1);
     }
 
     put(key: string, value: T): void {
